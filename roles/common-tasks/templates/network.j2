@@ -1,0 +1,12 @@
+# This file is managed by ansible 
+
+{{ ansible_default_ipv4.address }}
+interface_name: {{ ansible_default_ipv4.interface }}
+
+{% for range in  this_range %}
+  range: {{ range }}
+{% endfor%}
+
+{% if VUL03242 == true %}
+mitigation text
+{% endif %}

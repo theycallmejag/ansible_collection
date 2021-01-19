@@ -1,0 +1,9 @@
+- name: user-management
+  roles: [user-management]
+  tags: user-management
+  hosts: all
+
+- name: common-tasks
+  roles: [common-tasks]
+  tags: common-tasks
+  hosts: all

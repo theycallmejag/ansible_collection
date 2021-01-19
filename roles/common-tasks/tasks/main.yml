@@ -1,0 +1,28 @@
+---
+- name: install ntp
+  package: 
+   name: ntp
+   state: installed
+  when: [NTP]
+
+- name: run uptime
+  shell: uptime
+  register: uptime_output
+
+- name: Print uptime_output to console
+  debug:
+   msg: "{{uptime_output.stdout}}" 
+
+- name: modify httpd config file
+  file:
+   path: /etc/httpd/conf/httpd.conf
+   state: file
+  notify: restart httpd
+
+- name: copy updated /etc/sysconfig/network file
+  template:
+   src: network.j2
+   dest: /etc/sysconfig/network
+   mode: 0644
+   owner: root
+   group: root

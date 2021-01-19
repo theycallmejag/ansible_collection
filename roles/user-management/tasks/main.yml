@@ -1,0 +1,31 @@
+---
+
+- name: Install common packages
+  yum:
+   name: wget,bzip2,httpd,vim
+   state: installed
+
+- name: Create admin user
+  user:
+   name: "mike"
+   groups: "wheel"
+
+- name: Unlock password and set it to empty
+  command: passwd -d mike
+
+- name: Expire password
+  command: chage -d 0 mike
+
+- name: Create greeting file with message
+  copy:
+    dest: "/var/greeting.txt"
+    content: |
+      Success, user mike has been added, please create password.
+
+- name: Display greeting
+  command: cat greeting.txt chdir=/var
+  register: command_output
+
+- name: Print to console
+  debug:
+    msg: "{{command_output.stdout}}"

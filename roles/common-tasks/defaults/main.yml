@@ -1,0 +1,9 @@
+---
+
+this_range:
+ - first one
+ - second one
+ - third one
+
+NTP: true
+VUL03242: true
